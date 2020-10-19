@@ -7,10 +7,12 @@
                 <div class="form-group">
                     <label for="exampleInputEmail1">Name</label>
                     <input v-model="form.name" type="text" class="form-control">
+                    <span class="text-danger text-small">{{ errors.first('name') }}</span>
                 </div>
                 <div class="form-group">
                     <label for="exampleInputEmail1">Price</label>
                     <input v-model="form.price" type="text" class="form-control">
+                    <span class="text-danger text-small">{{ errors.first('price') }}</span>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
@@ -20,10 +22,13 @@
 </template>
 
 <script>
+import { Errors } from 'form-backend-validation'
+
 export default {
     data: () => ({
         form: {},
-        loading: false
+        loading: false,
+        errors: new Errors
     }),
     computed: {
         isEditing() {
@@ -42,6 +47,7 @@ export default {
                 .then(response => {
                     this.$router.go(-1)
                 })
+                .catch(error => this.errors = new Errors(error.response.data.errors))
                 .finally(() => this.loading = false)
             
         },
@@ -51,6 +57,7 @@ export default {
                 .then(response => {
                     this.$router.go(-1)
                 })
+                .catch(error => this.errors = new Errors(error.response.data.errors))
                 .finally(() => this.loading = false)
             
         },

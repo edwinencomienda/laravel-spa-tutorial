@@ -15,8 +15,18 @@ class ItemController extends Controller
         return ItemResource::collection($items);
     }
 
+    private function validateRequest(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required',
+        ]);
+    }
+
     public function store(Request $request)
     {
+        $this->validateRequest($request);
+
         $item = Item::create([
             'name' => $request->name,
             'price' => $request->price,
@@ -27,6 +37,8 @@ class ItemController extends Controller
 
     public function update(Request $request, Item $item)
     {
+        $this->validateRequest($request);
+
         $item->fill([
             'name' => $request->name,
             'price' => $request->price,
