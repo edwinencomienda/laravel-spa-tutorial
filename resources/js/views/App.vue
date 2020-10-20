@@ -18,14 +18,17 @@
                         <li class="nav-item">
                             <router-link to="/items" class="nav-link">Items</router-link>
                         </li>
+                        <li class="nav-item">
+                            <router-link v-if="app.currentUser.role === 'admin'" to="/users" class="nav-link">Users (admin)</router-link>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                Edwin Encomienda
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{ app.currentUser.name }}
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">

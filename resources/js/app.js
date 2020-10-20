@@ -12,6 +12,14 @@ import App from './views/App'
 window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
+Vue.mixin({
+    computed: {
+        app() {
+            return window.App
+        }
+    }
+})
+
 const app = new Vue({
     el: '#app',
     router,

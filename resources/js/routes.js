@@ -25,8 +25,21 @@ const router = new VueRouter({
             path: '/items/:id/edit',
             name: 'itemsEdit',
             component: require('./views/items/Form').default
+        },
+        {
+            path: '/users',
+            name: 'users',
+            component: require('./views/users/Index').default
         }
     ],
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.name === 'users' && window.App.currentUser.role !== 'admin') {
+        next(false)
+    } else {
+        next()
+    }
+})
 
 export default router

@@ -10,6 +10,13 @@
     <div id="app">
         <app></app>
     </div>
+    @auth
+        <script>
+            window.App = @json([
+                'currentUser' => auth()->user()
+            ]);
+        </script>
+    @endauth
     <script src="{{ asset('js/app.js') }}" defer></script>
 </body>
 </html>
